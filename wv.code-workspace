@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "wavemod"
+		},
+		{
+			"path": "waveboard"
+		},
+		{
+			"path": "wavemod_py"
+		},
+		{
+			"path": "boards"
+		}
+	]
+}
