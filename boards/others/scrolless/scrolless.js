@@ -87,14 +87,6 @@ function updateSquaresViewport() {
   const minRow = Math.max(0, Math.floor(visibleTop / SQUARE_SIZE));
   const maxRow = Math.min(ROW_COUNT - 1, Math.floor(visibleBottom / SQUARE_SIZE));
 
-  // Skip if there’s no change in which squares should be visible
-  if (
-    minRow === lastMinRow && maxRow === lastMaxRow &&
-    minCol === lastMinCol && maxCol === lastMaxCol
-  ) {
-    return;
-  }
-
   renderVisibleSquares(minRow, maxRow, minCol, maxCol);
   removeInvisibleSquares(minRow, maxRow, minCol, maxCol);
 }
