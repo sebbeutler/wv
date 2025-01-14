@@ -1,16 +1,20 @@
 // Board.tsx
 import { JSX, Component, onMount, onCleanup } from "solid-js";
-import { createCameraStore } from "./cameraStore";
-import CanvasLayer from "./CanvasLayer";
-import DOMLayer from "./DOMLayer";
+import { createCameraStore, createViewportStore } from "./viewportStore.ts";
+import CanvasLayer from "./CanvasLayer.tsx";
+import DOMLayer from "./DOMLayer.tsx";
+import Minimap from "./Minimap.tsx";
 
 interface BoardProps {
+  width: number;
+  height: number;
   children: JSX.Element;
 }
 
 const Board: Component<BoardProps> = (props: BoardProps) => {
   const camera = createCameraStore();
-  
+  const viewport = createViewportStore(props.width, props.height);
+
   let boardRef: HTMLDivElement | undefined;
   let DOMLayerRef!: HTMLDivElement;
 
@@ -34,8 +38,11 @@ const Board: Component<BoardProps> = (props: BoardProps) => {
   };
 
   const onPointerMove = (e: PointerEvent) => {
-    if (isPanning && e.pointerId === lastPointerId) {
-      camera.translate(e.movementX, e.movementY);
+    if (isPanning &&
+      e.target === DOMLayerRef &&
+      e.pointerId === lastPointerId
+    ) {
+      camera.translate(-e.movementX, -e.movementY);
     }
   };
 
@@ -50,12 +57,25 @@ const Board: Component<BoardProps> = (props: BoardProps) => {
     DOMLayerRef.appendChild(child);
   };
 
+  const onKeyPress = (e: KeyboardEvent) => {
+    if (e.key == "c") {
+      // Center camera
+      console.log(
+        -(DOMLayerRef.clientWidth - globalThis.innerWidth) / 2,
+        -(DOMLayerRef.clientHeight - globalThis.innerHeight) / 2);
+      camera.move(
+        -(DOMLayerRef.clientWidth - globalThis.innerWidth) / 2,
+        -(DOMLayerRef.clientHeight - globalThis.innerHeight) / 2);
+    }
+  }
+
   onMount(() => {
-    // You might want to listen at the document level to ensure you don't lose events
     boardRef?.addEventListener("pointerdown", onPointerDown);
     boardRef?.addEventListener("pointermove", onPointerMove);
     boardRef?.addEventListener("pointerup", onPointerUp);
+    boardRef?.addEventListener("pointerout", onPointerUp);
     boardRef?.addEventListener("wheel", onWheel, { passive: false });
+    globalThis.addEventListener("keypress", onKeyPress);
 
     addChild(props.children);
   });
@@ -64,7 +84,9 @@ const Board: Component<BoardProps> = (props: BoardProps) => {
     boardRef?.removeEventListener("pointerdown", onPointerDown);
     boardRef?.removeEventListener("pointermove", onPointerMove);
     boardRef?.removeEventListener("pointerup", onPointerUp);
+    boardRef?.removeEventListener("pointerout", onPointerUp);
     boardRef?.removeEventListener("wheel", onWheel);
+    globalThis.removeEventListener("keypress", onKeyPress);
   });
 
   return (
@@ -82,7 +104,9 @@ const Board: Component<BoardProps> = (props: BoardProps) => {
       <CanvasLayer camera={camera} />
 
       {/* DOM overlay */}
-      <DOMLayer ref={DOMLayerRef} camera={camera} />
+      <DOMLayer viewport={viewport} ref={DOMLayerRef} camera={camera} />
+    
+      <Minimap camera={camera} viewport={viewport} />
     </div>
   );
 };

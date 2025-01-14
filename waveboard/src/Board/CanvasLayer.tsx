@@ -1,6 +1,6 @@
 // CanvasLayer.tsx
 import { Component, createEffect, onMount, createSignal } from "solid-js";
-import type { createCameraStore } from "./cameraStore";
+import type { createCameraStore } from "./viewportStore.ts";
 
 interface Props {
   camera: ReturnType<typeof createCameraStore>;
@@ -12,17 +12,17 @@ const CanvasLayer: Component<Props> = (props) => {
 
   // Let’s store the known container width/height
   // (For a quick hack, just use window dimensions.)
-  const [containerW, setContainerW] = createSignal(window.innerWidth);
-  const [containerH, setContainerH] = createSignal(window.innerHeight);
+  const [containerW, setContainerW] = createSignal(globalThis.innerWidth);
+  const [containerH, setContainerH] = createSignal(globalThis.innerHeight);
 
   // If you want them to update on resize:
   onMount(() => {
     const onResize = () => {
-      setContainerW(window.innerWidth);
-      setContainerH(window.innerHeight);
+      setContainerW(globalThis.innerWidth);
+      setContainerH(globalThis.innerHeight);
     };
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    globalThis.addEventListener("resize", onResize);
+    return () => globalThis.removeEventListener("resize", onResize);
   });
 
   // Each canvas will be half the container
@@ -56,7 +56,7 @@ const CanvasLayer: Component<Props> = (props) => {
       const offsetY = row * tileHeight();
 
       // Translate + scale according to the camera, plus quadrant offset
-      ctx.translate(x - offsetX, y - offsetY);
+      ctx.translate(-x - offsetX, -y - offsetY);
       ctx.scale(s, s);
 
       // --- EXAMPLE DRAWING ---

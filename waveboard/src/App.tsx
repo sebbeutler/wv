@@ -1,13 +1,10 @@
-import { createSignal, onCleanup } from "solid-js";
-import icon from "./assets/icon.png";
-import { invoke } from "@tauri-apps/api/core";
+import { createSignal } from "solid-js";
 import "./App.css";
-import * as wmd from "./commands";
+import * as wmd from "./commands.ts";
 
-import Board from "./Board/Board";
-import ScriptEditor from "./CodeArea";
-import Tab from "./Tab";
-import NodeFrame from "./NodeFrame"
+import Board from "./Board/Board.tsx";
+import ScriptEditor from "./CodeArea.tsx";
+import Tab from "./Tab.tsx";
 
 function App() {
 
@@ -37,7 +34,7 @@ function App() {
         </Tab>
 
         <Tab signal={currentTab} tabname="Board">
-        <Board>
+        <Board width={3000} height={3000}>
           <div
             style={{
               position: "absolute",
