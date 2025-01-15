@@ -70,29 +70,29 @@ const CanvasLayer: Component<Props> = (props) => {
   return (
     <div
       style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        /* 
-          Flex container to tile canvases in a 2x2 grid
-          filling the entire board container:
-        */
-        display: "grid",
-        "grid-template-columns": "repeat(2, 1fr)",
-        width: "100%",
-        height: "100%",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      /* 
+        Flex container to tile canvases in a 2x2 grid
+        filling the entire board container:
+      */
+      display: "grid",
+      "grid-template-columns": "repeat(2, 1fr)",
+      width: "100%",
+      height: "100%",
       }}
     >
       {/* Canvas */}
       {Array.from({ length: 4 }).map((_, i) => (
-        <canvas
-          ref={(el) => (canvasRefs[i] = el)}
-          width={tileWidth()}
-          height={tileHeight()}
-          style={{
-            "border": "1px solid #ccc",
-          }}
-        />
+      <canvas
+        ref={(el) => (canvasRefs[i] = el)}
+        width={tileWidth()}
+        height={tileHeight()}
+        style={{
+        "border": "1px groove #ccc",
+        }}
+      />
       ))}
     </div>
   );

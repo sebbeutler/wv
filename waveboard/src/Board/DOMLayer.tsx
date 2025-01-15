@@ -33,14 +33,14 @@ const DOMLayer: Component<Props> = (props) => {
         transform: transform()
       }}
     >
-      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="pointer-events: none;">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="pointer-events: none;border: 1px groove #ccc;">
         <defs>
-          <pattern id="smallGrid" width="8" height="8" patternUnits="userSpaceOnUse">
-        <path d="M 8 0 L 0 0 0 8" fill="none" stroke="currentColor" stroke-width="0.5"></path>
+          <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(128, 128, 128, 0.3)" stroke-width="0.3"></path>
           </pattern>
-          <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
-        <rect width="80" height="80" fill="url(#smallGrid)"></rect>
-        <path d="M 80 0 L 0 0 0 80" fill="none" stroke="currentColor" stroke-width="1"></path>
+          <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+        <rect width="100" height="100" fill="url(#smallGrid)"></rect>
+        <path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(128, 128, 128, 0.7)" stroke-width="0.7"></path>
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#grid)"></rect>
