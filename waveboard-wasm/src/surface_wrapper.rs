@@ -1,10 +1,10 @@
+use crate::{IADQContext, SharedPtr};
 use wgpu::{Instance, Surface};
-use winit::{ 
+use winit::{
     dpi::PhysicalSize,
     event::{Event, StartCause},
-    window::Window
+    window::Window,
 };
-use crate::{SharedPtr, IADQContext};
 
 /// Wrapper type which manages the surface and surface configuration.
 ///

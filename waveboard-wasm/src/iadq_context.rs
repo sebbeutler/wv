@@ -1,6 +1,6 @@
 use wgpu::{Instance, Surface};
 
-use crate::{Renderer, SurfaceWrapper, SharedPtr};
+use crate::{Renderer, SharedPtr, SurfaceWrapper};
 
 use winit::window::Window;
 
@@ -15,7 +15,10 @@ pub struct IADQContext {
 }
 
 impl IADQContext {
-    pub(crate) async fn init_async<R: Renderer>(surface: &mut SurfaceWrapper, window: SharedPtr<Window>) -> Self {
+    pub(crate) async fn init_async<R: Renderer>(
+        surface: &mut SurfaceWrapper,
+        window: SharedPtr<Window>,
+    ) -> Self {
         log::info!("Initializing wgpu...");
 
         let instance = wgpu::Instance::new(&wgpu::InstanceDescriptor::from_env_or_default());

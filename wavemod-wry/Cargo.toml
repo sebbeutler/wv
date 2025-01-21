@@ -4,5 +4,5 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-wry = "0.47.2"
+wry = { path = "../wry" }
 tao = "0.31.0"

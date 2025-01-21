@@ -265,7 +265,10 @@ struct ExampleContext {
 }
 impl ExampleContext {
     /// Initializes the example context.
-    async fn init_async<E: ExampleTrait>(surface: &mut SurfaceWrapper, window: Arc<Window>) -> Self {
+    async fn init_async<E: ExampleTrait>(
+        surface: &mut SurfaceWrapper,
+        window: Arc<Window>,
+    ) -> Self {
         log::info!("Initializing wgpu...");
 
         let instance = wgpu::Instance::new(&wgpu::InstanceDescriptor::from_env_or_default());

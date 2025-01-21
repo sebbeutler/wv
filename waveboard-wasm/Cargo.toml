@@ -15,7 +15,7 @@ path = "src/main.rs"
 test = false
 
 [features]
-default = []
+default = ["webgl"]
 webgl = ["wgpu/webgl"]
 webgpu = ["wgpu/webgpu"]
 
@@ -40,11 +40,11 @@ png = "0.17.16"
 pollster = "0.4"
 web-time = "0.2.4"
 wgpu = { version = "24.0.0", default-features = false, features = [
-    "serde",
-    "wgsl",
-    "dx12",
-    "metal",
-    "static-dxc",
+  "serde",
+  "wgsl",
+  "dx12",
+  "metal",
+  "static-dxc",
 ] }
 winit = { version = "0.29", features = ["android-native-activity"] }
 
@@ -62,16 +62,16 @@ wasm-bindgen = "0.2.97"
 wasm-bindgen-futures = "0.4.45"
 # We need these features in the framework examples and tests
 web-sys = { version = "0.3.74", default-features = false, features = [
-    "Location",
-    "Blob",
-    "RequestInit",
-    "RequestMode",
-    "Request",
-    "ImageData",
-    "Response",
-    "HtmlImageElement",
-    "WebGl2RenderingContext",
-    "CanvasRenderingContext2d",
+  "Location",
+  "Blob",
+  "RequestInit",
+  "RequestMode",
+  "Request",
+  "ImageData",
+  "Response",
+  "HtmlImageElement",
+  "WebGl2RenderingContext",
+  "CanvasRenderingContext2d",
 ] }
 
 [target.'cfg(target_arch = "wasm32")'.dev-dependencies]

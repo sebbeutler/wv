@@ -1,4 +1,3 @@
-
 pub trait Renderer: 'static + Sized {
     const SRGB: bool = true;
 
