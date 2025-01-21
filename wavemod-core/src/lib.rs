@@ -48,7 +48,7 @@ pub fn run() {
 
 	cfg_if::cfg_if! {
 	  if #[cfg(target_arch = "wasm32")] {
-	   wasm_bindgen_futures::spawn_local(async move { loop_function.await })
+	   wasm_bindgen_futures::spawn_local(async move { loop_function().await })
 	  } else {
 	   pollster::block_on(loop_function());
 	  }

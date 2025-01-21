@@ -13,7 +13,7 @@ function App() {
   const [currentTab, setCurrentTab] = createSignal("wasm");
 
   onMount(() => {
-    run_wasm("app-canvas");
+    // run_wasm("app-canvas");
   });
 
   return (

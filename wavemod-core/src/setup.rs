@@ -49,7 +49,6 @@ pub fn setup_logging() {
 }
 
 pub(crate) async fn setup_app<R: Renderer>(title: String) {
-	println!("SETUP");
 	log::debug!(
 		"Enabled backends: {:?}",
 		wgpu::Instance::enabled_backend_features()
@@ -112,21 +111,26 @@ pub(crate) async fn setup_app<R: Renderer>(title: String) {
 			let vbox = window.default_vbox().unwrap();
 			builder.build_gtk(vbox)?
 		};
-		_webview
 	};
-	println!("PREP LOOP");
-
 	setup_eventloop::<R>(event_loop, window).await;
 }
 
 async fn setup_eventloop<R: crate::Renderer>(event_loop: EventLoop<()>, window: SharedPtr<Window>) {
-	println!("SETUPLOOP");
-
 	let mut surface = crate::SurfaceWrapper::new();
 	let context = crate::IADQContext::init_async::<R>(&mut surface, window.clone()).await;
 
 	#[cfg(target_arch = "wasm32")]
 	let mut frame_counter = FrameCounter::new();
+
+	let mut board = crate::board::create_board();
+	board.add_node(crate::board::Node::new("xplat-node"));
+	cfg_if::cfg_if! {
+		if #[cfg(target_arch = "wasm32")] {
+		 board.add_node(crate::board::Node::new("wasm-node"));
+		} else {
+		 board.add_node(crate::board::Node::new("native-node"));
+		}
+	}
 
 	let mut example = None;
 
@@ -184,17 +188,6 @@ async fn setup_eventloop<R: crate::Renderer>(event_loop: EventLoop<()>, window: 
 						example = None;
 						target.exit();
 					}
-					#[cfg(not(target_arch = "wasm32"))]
-					WindowEvent::KeyboardInput {
-						event: KeyEvent {
-							logical_key: Key::Character(s),
-							..
-						},
-						..
-					} if s == "r" => {
-						println!("{:#?}", context.instance.generate_report());
-					}
-
 					WindowEvent::RedrawRequested => {
 						if example.is_none() {
 							return;
