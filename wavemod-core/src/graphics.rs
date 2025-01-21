@@ -158,7 +158,7 @@ pub fn create_shader_pipeline(
 
 	let canvas_vs = device.create_shader_module(wgpu::ShaderModuleDescriptor {
 		label: Some("Canvas Vertex Shader"),
-		source: wgpu::ShaderSource::Wgsl(include_str!("../assets/canvas.wgsl").into()),
+		source: wgpu::ShaderSource::Wgsl(include_str!("./example/canvas.wgsl").into()),
 	});
 	let canvas_buffer_layout = wgpu::VertexBufferLayout {
 		array_stride: std::mem::size_of::<[f32; 3]>() as wgpu::BufferAddress, // Total size of one vertex

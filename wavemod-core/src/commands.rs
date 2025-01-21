@@ -14,7 +14,7 @@ pub fn get_board_props(
 
 pub fn gx_init(window: SharedPtr<winit::window::Window>) {
 	let gx = crate::graphics::create_graphics(window.clone())
-		.with_shader(include_str!("../assets/cosmos.wgsl"))
+		.with_shader(include_str!("./example/cosmos.wgsl"))
 		.apply_shader(0)
 		.spawn_render_loop();
 	// window.manage(Mutex::new(gx.surface));
