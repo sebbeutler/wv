@@ -1,0 +1,8 @@
+[package]
+name = "pinboard-wry"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+wry = "0.47.2"
+tao = "0.31.0"
