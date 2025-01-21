@@ -44,13 +44,13 @@ pub fn run() {
 	log::info!("Initializing application");
 
 	let title = "wavemod-core";
+	let loop_function = || setup::setup_app::<example::BunnyRenderer>(title.to_string());
 
 	cfg_if::cfg_if! {
 	  if #[cfg(target_arch = "wasm32")] {
-	   wasm_bindgen_futures::spawn_local(async move { setup::setup_app::<example::BunnyRenderer>(title.to_string()).await })
+	   wasm_bindgen_futures::spawn_local(async move { loop_function.await })
 	  } else {
-	   pollster::block_on(setup::setup_app::<example::BunnyRenderer>(title.to_string())).ok();
+	   pollster::block_on(loop_function());
 	  }
 	}
-	log::info!("Did not block");
 }

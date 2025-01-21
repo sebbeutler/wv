@@ -48,9 +48,7 @@ pub fn setup_logging() {
 	}
 }
 
-pub(crate) async fn setup_app<R: Renderer>(
-	title: String,
-) -> Result<(), Box<dyn std::error::Error>> {
+pub(crate) async fn setup_app<R: Renderer>(title: String) {
 	println!("SETUP");
 	log::debug!(
 		"Enabled backends: {:?}",
@@ -100,7 +98,7 @@ pub(crate) async fn setup_app<R: Renderer>(
 			target_os = "ios",
 			target_os = "android"
 		))]
-		let _webview = builder.build(&window)?;
+		let _webview = builder.build(&window).expect("Cannot build WebView (wry)");
 		#[cfg(not(any(
 			target_os = "windows",
 			target_os = "macos",
@@ -119,7 +117,6 @@ pub(crate) async fn setup_app<R: Renderer>(
 	println!("PREP LOOP");
 
 	setup_eventloop::<R>(event_loop, window).await;
-	Ok(())
 }
 
 async fn setup_eventloop<R: crate::Renderer>(event_loop: EventLoop<()>, window: SharedPtr<Window>) {

@@ -5,7 +5,7 @@ use xshell::Shell;
 
 use crate::util::{check_all_programs, Program};
 
-const OUTPUT_DIR: &str = "waveboard/src/Components/webgl2/";
+const OUTPUT_DIR: &str = "waveboard/src/webgl2/";
 const BIN_NAME: &str = "waveboard-core";
 
 pub(crate) fn run_wasm(shell: &Shell, mut args: Arguments) -> anyhow::Result<()> {
@@ -52,7 +52,7 @@ pub(crate) fn build_wasm(shell: &Shell, mut args: Arguments) -> anyhow::Result<(
     .run()
     .context("Failed to build webgpu examples for wasm")?;
 
-	log::info!("running wasm-bindgen on webgpu examples");
+	log::info!("running wasm-bindgen for webgpu");
 
 	xshell::cmd!(
         shell,
@@ -62,7 +62,7 @@ pub(crate) fn build_wasm(shell: &Shell, mut args: Arguments) -> anyhow::Result<(
     .run()
     .context("Failed to run wasm-bindgen")?;
 
-	log::info!("building webgl examples");
+	log::info!("building webgl2");
 
 	xshell::cmd!(
         shell,
@@ -73,7 +73,7 @@ pub(crate) fn build_wasm(shell: &Shell, mut args: Arguments) -> anyhow::Result<(
     .run()
     .context("Failed to build webgl examples for wasm")?;
 
-	log::info!("running wasm-bindgen on webgl examples");
+	log::info!("running wasm-bindgen for webgl2");
 
 	xshell::cmd!(
         shell,

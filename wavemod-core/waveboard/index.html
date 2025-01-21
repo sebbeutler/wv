@@ -1,31 +1,12 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
-    </head>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+  </head>
 
-    <body>
+  <body>
     <div id="root"></div>
-	<script src="/src/main.tsx" type="module"></script>
-        <div>
-            <label for="axis">Axis:</label>
-            <select id="axis">
-                <option value="0">X-Axis</option>
-                <option value="1">Y-Axis</option>
-                <option value="2" selected>Z-Axis</option>
-            </select>
-            <label for="position">Position:</label>
-            <input
-                id="position"
-                type="range"
-                min="-10000.0"
-                max="100.0"
-                step="0.01"
-                value="0"
-            />
-        </div>
-        <canvas id="canvas" width="800" height="600"></canvas>
-        <!-- <script type="module" src="./src/Components/splatting.ts"></script> -->
-    </body>
+    <script src="/src/main.tsx" type="module"></script>
+  </body>
 </html>
