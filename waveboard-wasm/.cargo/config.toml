@@ -1,0 +1,7 @@
+[alias]
+xtask = "run --manifest-path xtask/Cargo.toml --"
+
+#[target.'cfg(target_arch = "wasm32")']
+#rustflags = [
+#    "-C", "target-feature=+atomics,+bulk-memory,+mutable-globals"
+#]

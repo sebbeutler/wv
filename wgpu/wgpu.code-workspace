@@ -1,0 +1,47 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../wv/waveboard"
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/.git": true,
+			"**/.svn": true,
+			"**/.hg": true,
+			"**/CVS": true,
+			"**/.DS_Store": true,
+			"**/Thumbs.db": true,
+			".cargo": true,
+			".config": true,
+			".github": true,
+			"cts_runner/": true,
+			"etc/": true,
+			"deno_webgpu/": true,
+			"naga/": true,
+			"naga-cli/": true,
+			"player/": true,
+			"tests/": true,
+			".deny.toml": true,
+			".gitattributes": true,
+			"CHANGELOG.md": true,
+			"CODE_OF_CONDUCT.md": true,
+			"CONTRIBUTING.md": true,
+			"GOVERNANCE.md": true,
+			"LICENSE.APACHE": true,
+			"LICENSE.MIT": true,
+			"RELEASE.md": true,
+			"codecov.yml": true,
+			"logo.png": true,
+			"rust-toolchain.toml": true,
+			"rustfmt.toml": true,
+			"shell.nix": true,
+			"taplo.toml": true,
+			"typos.toml": true,
+			".envrc": true
+		},
+	}
+}

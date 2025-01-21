@@ -1,0 +1,78 @@
+[package]
+name = "waveboard-wasm"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+version = "0.1.0"
+authors = ["sbx"]
+
+[lib]
+path = "src/lib.rs"
+harness = false
+
+[[bin]]
+name = "waveboard-wasm"
+path = "src/main.rs"
+test = false
+
+[features]
+default = []
+webgl = ["wgpu/webgl"]
+webgpu = ["wgpu/webgpu"]
+
+
+[package.lints.clippy]
+manual_c_str_literals = "allow"
+ref_as_ptr = "warn"
+
+[dependencies]
+bytemuck = { version = "1.21", features = ["derive", "min_const_generics"] }
+cfg-if = "1"
+encase = { version = "0.10.0", features = ["glam"] }
+flume = "0.11"
+getrandom = "0.2"
+glam = { version = "0.29", features = ["bytemuck"] }
+ktx2 = "0.3"
+log = "0.4"
+nanorand = { version = "0.7", default-features = false, features = ["wyrand"] }
+noise = { version = "0.8", git = "https://github.com/Razaekel/noise-rs.git", rev = "c6942d4fb70af26db4441edcf41f90fa115333f2" }
+obj = "0.10"
+png = "0.17.16"
+pollster = "0.4"
+web-time = "0.2.4"
+wgpu = { version = "24.0.0", default-features = false, features = [
+    "serde",
+    "wgsl",
+    "dx12",
+    "metal",
+    "static-dxc",
+] }
+winit = { version = "0.29", features = ["android-native-activity"] }
+
+[dev-dependencies]
+wgpu-test = { version = "24.0.0", path = "../wgpu/tests" }
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+env_logger = "0.11"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+console_error_panic_hook = "0.1.7"
+console_log = "1"
+fern = "0.7"
+wasm-bindgen = "0.2.97"
+wasm-bindgen-futures = "0.4.45"
+# We need these features in the framework examples and tests
+web-sys = { version = "0.3.74", default-features = false, features = [
+    "Location",
+    "Blob",
+    "RequestInit",
+    "RequestMode",
+    "Request",
+    "ImageData",
+    "Response",
+    "HtmlImageElement",
+    "WebGl2RenderingContext",
+    "CanvasRenderingContext2d",
+] }
+
+[target.'cfg(target_arch = "wasm32")'.dev-dependencies]
+wasm-bindgen-test = "0.3"
